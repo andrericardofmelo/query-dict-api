@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FraudMarkers {
     private String watermark;
+
     private Settlements applicationFrauds;
     private Settlements muleAccounts;
     private Settlements scammerAccounts;

@@ -1,5 +1,6 @@
 package br.com.pix.query_dict_api.domain;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,8 @@ import lombok.NoArgsConstructor;
 public class KeyStatistics {
     private Spi spi;
     private FraudMarkers fraudMarkers;
+    @NotEmpty
     private InfractionReports infractionReports;
+    @NotEmpty
     private EntriesKey entries;
 }
