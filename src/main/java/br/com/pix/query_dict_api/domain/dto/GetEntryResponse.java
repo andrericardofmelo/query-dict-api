@@ -1,8 +1,8 @@
 package br.com.pix.query_dict_api.domain.dto;
 
-import br.com.pix.query_dict_api.domain.Entry;
-import br.com.pix.query_dict_api.domain.KeyStatistics;
-import br.com.pix.query_dict_api.domain.OwnerStatistics;
+import br.com.pix.query_dict_api.domain.entries.Entry;
+import br.com.pix.query_dict_api.domain.statistics.KeyStatistics;
+import br.com.pix.query_dict_api.domain.statistics.OwnerStatistics;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package br.com.pix.query_dict_api.domain;
+package br.com.pix.query_dict_api.domain.entries;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

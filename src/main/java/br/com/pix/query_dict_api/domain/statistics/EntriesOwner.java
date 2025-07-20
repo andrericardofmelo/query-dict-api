@@ -1,13 +1,13 @@
-package br.com.pix.query_dict_api.domain;
+package br.com.pix.query_dict_api.domain.statistics;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Spi {
+@NoArgsConstructor
+public class EntriesOwner {
     private String watermark;
-    private Settlements settlements;
+    private int registeredAccounts;
 }

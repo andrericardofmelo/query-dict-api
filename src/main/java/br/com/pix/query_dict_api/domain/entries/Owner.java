@@ -1,4 +1,4 @@
-package br.com.pix.query_dict_api.domain;
+package br.com.pix.query_dict_api.domain.entries;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Owner {
-    private OwnerType ownerType;
+    private OwnerType type;
     @NotBlank
     private String TaxIdNumber;
     @NotBlank

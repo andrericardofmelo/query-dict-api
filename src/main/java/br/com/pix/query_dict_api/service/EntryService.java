@@ -1,6 +1,6 @@
 package br.com.pix.query_dict_api.service;
 
-import br.com.pix.query_dict_api.domain.KeyType;
+import br.com.pix.query_dict_api.domain.entries.KeyType;
 import br.com.pix.query_dict_api.domain.dto.AccountRequest;
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.repo.EntryRepository;
@@ -10,8 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.pix.query_dict_api.service.Constants.*;
+
 @Service
 public class EntryService {
+
     @Autowired
     private EntryHelper entryHelper;
     @Autowired
@@ -20,11 +23,15 @@ public class EntryService {
     private EntryRepository entryRepository;
 
     public Optional<GetEntryResponse> getEntryByKey(String key) throws Exception {
-        if (entryHelper.validationKeyType(key) == KeyType.INVALID) {
-            throw new RuntimeException("Invalid key type for key: " + key);
-        }
+        validateKeyTypeByKey(key);
         return Optional.ofNullable(Optional.of(entryRepository.getEntryByKey(key))
-                .orElseThrow(() -> new RuntimeException("Key not found: " + key)));
+                .orElseThrow(() -> new RuntimeException(KEY_NOT_FOUND + key)));
+    }
+
+    private void validateKeyTypeByKey(String key) {
+        if (entryHelper.validationKeyType(key) == KeyType.INVALID) {
+            throw new RuntimeException(INVALID_KEY_TYPE_FOR_KEY + key);
+        }
     }
 
     public List<GetEntryResponse> getEntriesByAccount(AccountRequest accountRequest) throws Exception {

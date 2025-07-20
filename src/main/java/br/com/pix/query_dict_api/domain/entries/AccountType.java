@@ -1,4 +1,4 @@
-package br.com.pix.query_dict_api.domain;
+package br.com.pix.query_dict_api.domain.entries;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
