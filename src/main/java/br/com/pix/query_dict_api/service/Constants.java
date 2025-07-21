@@ -11,5 +11,7 @@ public class Constants {
     public static final String KEY_NOT_FOUND = "Key not found: ";
     public static final String QUERYING_ENTRIES_BY_ACCOUNT = "Querying entries by account: {}";
     public static final String QUERYING_KEY = "Querying key: {}";
+    public static final String QUERYING_KEY_STATIC = "Querying key with statistics: {}";
+    public static final String OBJECT_NOT_FOUND = "not found";
 }
 

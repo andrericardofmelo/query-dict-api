@@ -3,5 +3,5 @@ spring:
     name: query-dict-api
   data:
     mongodb:
-      uri: 'mongodb+srv://admin:<admindb>@clusterdict.lns9f2j.mongodb.net/?retryWrites=true&w=majority&appName=ClusterDict'
+      uri: 'mongodb+srv://admin:admindb@clusterdict.lns9f2j.mongodb.net/?retryWrites=true&w=majority&appName=ClusterDict'
       database: dictdb
