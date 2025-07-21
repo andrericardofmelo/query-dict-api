@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OwnerLegalPerson extends Owner{
+public class OwnerLegalPerson extends Owner {
     @NotBlank
     @Pattern(regexp = "[0-9]{14}")
     private String taxIdNumber;

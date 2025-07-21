@@ -3,6 +3,7 @@ package br.com.pix.query_dict_api.service;
 import br.com.pix.query_dict_api.domain.dto.AccountRequest;
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.domain.entries.KeyType;
+import br.com.pix.query_dict_api.exception.InvalidKeyTypeException;
 import br.com.pix.query_dict_api.repo.EntriesRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,9 @@ public class EntryService {
         this.entriesRepository = entriesRepository;
     }
 
-    private void validateKeyTypeByKey(String key) {
+    private void validateKeyTypeByKey(String key) throws InvalidKeyTypeException {
         if (validationHelper.validationKeyType(key) == KeyType.INVALID) {
-            throw new RuntimeException(INVALID_KEY_TYPE_FOR_KEY + key);
+            throw new InvalidKeyTypeException(INVALID_KEY_TYPE_FOR_KEY + key);
         }
     }
 
@@ -38,9 +39,8 @@ public class EntryService {
         return entriesHelper.mountGetEntryResponse(entriesRepository.findEntryByKey(key));
     }
 
-    public List<GetEntryResponse> getEntriesByAccount(AccountRequest accountRequest) throws Exception {
+    public List<GetEntryResponse> getEntriesByAccount(AccountRequest accountRequest) {
         accountHelper.validationAccount(accountRequest);
-//        entryRepository.getEntriesByAccount(accountRequest);
         return new ArrayList<>();
     }
 }

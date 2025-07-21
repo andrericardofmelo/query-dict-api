@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,17 +20,18 @@ import static br.com.pix.query_dict_api.service.Constants.QUERYING_KEY;
 
 @RestController
 @RequestMapping("/v1/entries")
-@Tag(name = "Keys", description = "Operations related to keys")
+@Tag(name = "Entries", description = "Operations related to entries by key")
 @Slf4j
 public class KeyController {
 
-    @Autowired
-    private EntryService entryService;
+    private final EntryService entryService;
+
+    public KeyController(final EntryService entryService) {
+        this.entryService = entryService;
+    }
 
     @Operation(summary = "Gets key information based on the provided key", description = "Returns a single document based on the provided key")
-    @ApiResponse(responseCode = "200", description = "key information retrieved successfully",
-            content = @Content(mediaType = "application/json", schema = @Schema(implementation = Entry.class)))
-    @ApiResponse(responseCode = "404", description = "Key not found")
+    @ApiResponse(responseCode = "200", description = "key information retrieved successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Entry.class)))
     @GetMapping(path = "/{key}")
     public Optional<GetEntryResponse> getEntryByKey(@PathVariable final String key) throws Exception {
         log.info(QUERYING_KEY, key);

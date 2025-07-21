@@ -5,3 +5,17 @@ spring:
     mongodb:
       uri: 'mongodb+srv://admin:admindb@clusterdict.lns9f2j.mongodb.net/?retryWrites=true&w=majority&appName=ClusterDict'
       database: dictdb
+open:
+  api:
+    info:
+      title: Query Dict API
+      description: API for querying entries data
+      version: 1.0.0
+      termsOfService: https://example.com/terms
+      contact:
+        name: André Ricardo da Silva Melo
+        url: https://github.com/andrericardofmelo
+        email: andrericardofmelo@gmail.com
+      license:
+        name: Apache License 2.0
+        url: https://www.apache.org/licenses/LICENSE-2.0

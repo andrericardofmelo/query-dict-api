@@ -4,7 +4,7 @@ import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.domain.entries.Entries;
 import org.springframework.stereotype.Component;
 
-import static br.com.pix.query_dict_api.service.Constants.*;
+import static br.com.pix.query_dict_api.service.Constants.OBJECT_NOT_FOUND;
 
 @Component
 public class EntriesHelper {
