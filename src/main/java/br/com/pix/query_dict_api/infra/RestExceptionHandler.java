@@ -15,8 +15,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorMensage> invalidKeyTypeException(InvalidKeyTypeException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMensage(HttpStatus.BAD_REQUEST, e.getMessage()));
     }
+
     @ExceptionHandler(EntriesNotFoundException.class)
-    public ResponseEntity<ErrorMensage>  entriesNotFoundException(EntriesNotFoundException e) {
+    public ResponseEntity<ErrorMensage> entriesNotFoundException(EntriesNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMensage(HttpStatus.NOT_FOUND, e.getMessage()));
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorMensage> runtimeException(RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMensage(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
     }
 }

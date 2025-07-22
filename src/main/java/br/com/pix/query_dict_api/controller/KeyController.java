@@ -34,6 +34,7 @@ public class KeyController {
     @ApiResponse(responseCode = "200", description = "key information retrieved successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Entry.class)))
     @ApiResponse(responseCode = "404", description = "key not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GetEntryResponse.class)))
     @ApiResponse(responseCode = "400", description = "invalid key type", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GetEntryResponse.class)))
+    @ApiResponse(responseCode = "500", description = "internal server error", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GetEntryResponse.class)))
     @GetMapping(path = "/{key}")
     public ResponseEntity<GetEntryResponse> getEntryByKey(@PathVariable final String key) {
         log.info(QUERYING_KEY, key);
