@@ -15,6 +15,6 @@ public enum KeyType {
     EVP("EVP"),
     INVALID("INVALID");
 
-    public String keyType;
+    String keyTypeEnum;
 
 }

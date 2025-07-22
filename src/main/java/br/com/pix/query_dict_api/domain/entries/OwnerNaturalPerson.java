@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OwnerNaturalPerson extends Owner {
     @NotBlank
-    @Pattern(regexp = "^[0-9]{11}$")
-    private String TaxIdNumber;
+    @Pattern(regexp = "^\\d{11}$")
+    private String taxIdNumber;
     @NotBlank
     @Pattern(regexp = "^([A-Za-zÀ-ÖØ-öø-ÿ' -]+)$")
     private String name;

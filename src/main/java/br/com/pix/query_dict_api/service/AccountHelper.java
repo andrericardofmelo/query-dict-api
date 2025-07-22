@@ -6,5 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class AccountHelper {
     public void validationAccount(AccountRequest accountRequest) {
+        // document why this method is empty
     }
 }

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class Owner {
     private OwnerType type;
     @NotBlank
-    private String TaxIdNumber;
+    private String taxIdNumber;
     @NotBlank
     private String name;
 }

@@ -3,6 +3,7 @@ package br.com.pix.query_dict_api.controller;
 import br.com.pix.query_dict_api.domain.dto.AccountRequest;
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.domain.entries.Entry;
+import br.com.pix.query_dict_api.exception.EntriesNotFoundException;
 import br.com.pix.query_dict_api.service.EntryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,8 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static br.com.pix.query_dict_api.infra.Constants.QUERYING_ENTRIES_BY_ACCOUNT;
-import static br.com.pix.query_dict_api.infra.Constants.QUERYING_KEY;
+import static br.com.pix.query_dict_api.infra.Constants.*;
 
 @RestController
 @RequestMapping("/v1/entries")
@@ -38,7 +38,11 @@ public class KeyController {
     @GetMapping(path = "/{key}")
     public ResponseEntity<GetEntryResponse> getEntryByKey(@PathVariable final String key) {
         log.info(QUERYING_KEY, key);
-        return ResponseEntity.ok(entryService.getEntryByKey(key));
+        GetEntryResponse response = entryService.getEntryByKey(key);
+        if (response == null) {
+            throw new EntriesNotFoundException(ENTRIES_NOT_FOUND);
+        }
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "/account")

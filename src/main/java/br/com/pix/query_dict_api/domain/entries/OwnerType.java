@@ -11,5 +11,5 @@ public enum OwnerType {
     NATURAL_PERSON("NATURAL_PERSON"),
     LEGAL_PERSON("LEGAL_PERSON");
 
-    private String ownerType;
+    private String ownerTypeEnum;
 }

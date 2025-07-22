@@ -8,6 +8,7 @@ class QueryDictApiApplicationTests {
 
     @Test
     void contextLoads() {
+        // Document why this method is empty
     }
 
 }
