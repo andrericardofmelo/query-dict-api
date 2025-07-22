@@ -3,7 +3,6 @@ package br.com.pix.query_dict_api.controller;
 
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.domain.entries.Entry;
-import br.com.pix.query_dict_api.exception.EntriesNotFoundException;
 import br.com.pix.query_dict_api.service.EntryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.when;
 
 class KeycontrollerTest {
@@ -36,19 +35,16 @@ class KeycontrollerTest {
         GetEntryResponse expectedResponse = new GetEntryResponse();
         String key = "27529429078";
         expectedResponse.setEntry(Entry.builder().key(key).build());
-
         when(entryService.getEntryByKey(key)).thenReturn(expectedResponse);
-
         ResponseEntity<GetEntryResponse> responseEntity = keyController.getEntryByKey(key);
-
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(expectedResponse, responseEntity.getBody());
     }
 
     @Test
     void testGetEntryByKeyNotFound() {
-        assertThrows(EntriesNotFoundException.class, () -> {
-            keyController.getEntryByKey("27529429022");
-        });
+        ResponseEntity<GetEntryResponse> responseEntity = keyController.getEntryByKey("27529429022");
+        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+        assertNull(responseEntity.getBody());
     }
 }

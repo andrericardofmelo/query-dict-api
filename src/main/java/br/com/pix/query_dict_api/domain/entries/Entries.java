@@ -5,6 +5,7 @@ import br.com.pix.query_dict_api.domain.statistics.OwnerStatistics;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -13,6 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Document(collection = "entries")
 @Schema(description = "Represents an entry in the dictionary with its response time, correlation ID, and entry details.")
 public class Entries {

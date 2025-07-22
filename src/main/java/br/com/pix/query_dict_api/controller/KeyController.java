@@ -39,10 +39,7 @@ public class KeyController {
     public ResponseEntity<GetEntryResponse> getEntryByKey(@PathVariable final String key) {
         log.info(QUERYING_KEY, key);
         GetEntryResponse response = entryService.getEntryByKey(key);
-        if (response == null) {
-            throw new EntriesNotFoundException(ENTRIES_NOT_FOUND);
-        }
-        return ResponseEntity.ok(response);
+        return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
     }
 
     @GetMapping(path = "/account")
