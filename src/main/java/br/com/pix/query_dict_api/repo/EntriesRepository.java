@@ -13,9 +13,9 @@ public interface EntriesRepository extends MongoRepository<Entries, String> {
 
 
     @Query("{ 'entry.key' : ?0 }")
-    Entries findEntryByKey(String key) throws Exception;
+    Entries findEntryByKey(String key);
 
     @Query("{ 'Entry.Account' : ?0 }")
-    List<Entries> getEntriesByAccount(AccountRequest accountRequest) throws Exception;
+    List<Entries> getEntriesByAccount(AccountRequest accountRequest);
 
 }

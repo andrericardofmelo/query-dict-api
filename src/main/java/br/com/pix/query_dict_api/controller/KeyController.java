@@ -10,13 +10,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-import static br.com.pix.query_dict_api.service.Constants.QUERYING_ENTRIES_BY_ACCOUNT;
-import static br.com.pix.query_dict_api.service.Constants.QUERYING_KEY;
+import static br.com.pix.query_dict_api.infra.Constants.QUERYING_ENTRIES_BY_ACCOUNT;
+import static br.com.pix.query_dict_api.infra.Constants.QUERYING_KEY;
 
 @RestController
 @RequestMapping("/v1/entries")
@@ -32,14 +32,16 @@ public class KeyController {
 
     @Operation(summary = "Gets key information based on the provided key", description = "Returns a single document based on the provided key")
     @ApiResponse(responseCode = "200", description = "key information retrieved successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Entry.class)))
+    @ApiResponse(responseCode = "404", description = "key not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GetEntryResponse.class)))
+    @ApiResponse(responseCode = "400", description = "invalid key type", content = @Content(mediaType = "application/json", schema = @Schema(implementation = GetEntryResponse.class)))
     @GetMapping(path = "/{key}")
-    public Optional<GetEntryResponse> getEntryByKey(@PathVariable final String key) throws Exception {
+    public ResponseEntity<GetEntryResponse> getEntryByKey(@PathVariable final String key) {
         log.info(QUERYING_KEY, key);
-        return Optional.ofNullable(entryService.getEntryByKey(key));
+        return ResponseEntity.ok(entryService.getEntryByKey(key));
     }
 
     @GetMapping(path = "/account")
-    public List<GetEntryResponse> getEntryListByAccount(@RequestBody final AccountRequest accountRequest) throws Exception {
+    public List<GetEntryResponse> getEntryListByAccount(@RequestBody final AccountRequest accountRequest) {
         log.info(QUERYING_ENTRIES_BY_ACCOUNT, accountRequest);
         return entryService.getEntriesByAccount(accountRequest);
     }

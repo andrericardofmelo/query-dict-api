@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-import static br.com.pix.query_dict_api.service.Constants.INVALID_KEY_TYPE_FOR_KEY;
-
 @Service
 public class EntryService {
 
@@ -28,13 +26,13 @@ public class EntryService {
         this.entriesRepository = entriesRepository;
     }
 
-    private void validateKeyTypeByKey(String key) throws InvalidKeyTypeException {
+    private void validateKeyTypeByKey(String key) {
         if (validationHelper.validationKeyType(key) == KeyType.INVALID) {
-            throw new InvalidKeyTypeException(INVALID_KEY_TYPE_FOR_KEY + key);
+            throw new InvalidKeyTypeException("The key type is invalid. Please provide a valid key type.");
         }
     }
 
-    public GetEntryResponse getEntryByKey(String key) throws Exception {
+    public GetEntryResponse getEntryByKey(String key) {
         validateKeyTypeByKey(key);
         return entriesHelper.mountGetEntryResponse(entriesRepository.findEntryByKey(key));
     }

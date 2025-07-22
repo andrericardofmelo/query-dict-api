@@ -4,7 +4,7 @@ import br.com.pix.query_dict_api.domain.entries.KeyType;
 import org.springframework.stereotype.Component;
 
 import static br.com.pix.query_dict_api.domain.entries.KeyType.CPF;
-import static br.com.pix.query_dict_api.service.Constants.*;
+import static br.com.pix.query_dict_api.infra.Constants.*;
 
 @Component
 public class ValidationHelper {

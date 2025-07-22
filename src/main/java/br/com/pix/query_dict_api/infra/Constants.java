@@ -1,4 +1,4 @@
-package br.com.pix.query_dict_api.service;
+package br.com.pix.query_dict_api.infra;
 
 public class Constants {
 
@@ -12,9 +12,8 @@ public class Constants {
     public static final String KEY_REGEX_EMAIL_PATTERN = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
     public static final String KEY_REGEX_PHONE_PATTERN = "^\\+[1-9]\\d{1,14}$";
     public static final String INVALID_KEY_FORMAT = "Invalid key format: ";
-    public static final String INVALID_KEY_TYPE_FOR_KEY = "Invalid key type for key: ";
     public static final String QUERYING_ENTRIES_BY_ACCOUNT = "Querying entries by account: {}";
     public static final String QUERYING_KEY = "Querying key: {}";
-    public static final String OBJECT_NOT_FOUND = "not found";
+    public static final String ENTRIES_NOT_FOUND = "Entries not found";
 }
 
