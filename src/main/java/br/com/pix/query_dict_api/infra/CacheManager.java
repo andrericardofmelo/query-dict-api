@@ -37,8 +37,4 @@ public class CacheManager {
             throw new RepositoryExcection("Error trying to retrieve the entry from the cache or repository");
         }
     }
-
-    public void invalidateCacheEntry(String key) {
-        entryCache.invalidate(key);
-    }
 }
