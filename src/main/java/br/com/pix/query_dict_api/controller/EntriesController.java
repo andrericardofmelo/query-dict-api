@@ -3,8 +3,7 @@ package br.com.pix.query_dict_api.controller;
 import br.com.pix.query_dict_api.domain.dto.AccountRequest;
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.domain.entries.Entry;
-import br.com.pix.query_dict_api.exception.EntriesNotFoundException;
-import br.com.pix.query_dict_api.service.EntryService;
+import br.com.pix.query_dict_api.service.EntriesService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,12 +21,12 @@ import static br.com.pix.query_dict_api.infra.Constants.*;
 @RequestMapping("/v1/entries")
 @Tag(name = "Entries", description = "Operations related to entries by key")
 @Slf4j
-public class KeyController {
+public class EntriesController {
 
-    private final EntryService entryService;
+    private final EntriesService entriesService;
 
-    public KeyController(final EntryService entryService) {
-        this.entryService = entryService;
+    public EntriesController(final EntriesService entriesService) {
+        this.entriesService = entriesService;
     }
 
     @Operation(summary = "Gets key information based on the provided key", description = "Returns a single document based on the provided key")
@@ -38,13 +37,13 @@ public class KeyController {
     @GetMapping(path = "/{key}")
     public ResponseEntity<GetEntryResponse> getEntryByKey(@PathVariable final String key) {
         log.info(QUERYING_KEY, key);
-        GetEntryResponse response = entryService.getEntryByKey(key);
+        GetEntryResponse response = entriesService.getEntryByKey(key);
         return response != null ? ResponseEntity.ok(response) : ResponseEntity.notFound().build();
     }
 
     @GetMapping(path = "/account")
     public List<GetEntryResponse> getEntryListByAccount(@RequestBody final AccountRequest accountRequest) {
         log.info(QUERYING_ENTRIES_BY_ACCOUNT, accountRequest);
-        return entryService.getEntriesByAccount(accountRequest);
+        return entriesService.getEntriesByAccount(accountRequest);
     }
 }

@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EntryService {
+public class EntriesService {
 
     private final AccountHelper accountHelper;
     private final ValidationHelper validationHelper;
     private final EntriesHelper entriesHelper;
     private final EntriesRepository entriesRepository;
 
-    public EntryService(AccountHelper accountHelper, ValidationHelper validationHelper, EntriesHelper entriesHelper, EntriesRepository entriesRepository) {
+    public EntriesService(AccountHelper accountHelper, ValidationHelper validationHelper, EntriesHelper entriesHelper, EntriesRepository entriesRepository) {
         this.accountHelper = accountHelper;
         this.validationHelper = validationHelper;
         this.entriesHelper = entriesHelper;

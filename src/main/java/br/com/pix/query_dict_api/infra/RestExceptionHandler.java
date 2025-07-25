@@ -1,7 +1,7 @@
 package br.com.pix.query_dict_api.infra;
 
 import br.com.pix.query_dict_api.exception.EntriesNotFoundException;
-import br.com.pix.query_dict_api.exception.ErrorMensage;
+import br.com.pix.query_dict_api.exception.DecoderMessageHandler;
 import br.com.pix.query_dict_api.exception.InvalidKeyTypeException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,17 +12,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(InvalidKeyTypeException.class)
-    public ResponseEntity<ErrorMensage> invalidKeyTypeException(InvalidKeyTypeException e) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorMensage(HttpStatus.BAD_REQUEST, e.getMessage()));
+    public ResponseEntity<DecoderMessageHandler> invalidKeyTypeException(InvalidKeyTypeException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new DecoderMessageHandler(HttpStatus.BAD_REQUEST, e.getMessage()));
     }
 
     @ExceptionHandler(EntriesNotFoundException.class)
-    public ResponseEntity<ErrorMensage> entriesNotFoundException(EntriesNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMensage(HttpStatus.NOT_FOUND, e.getMessage()));
+    public ResponseEntity<DecoderMessageHandler> entriesNotFoundException(EntriesNotFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new DecoderMessageHandler(HttpStatus.NOT_FOUND, e.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ErrorMensage> runtimeException(RuntimeException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorMensage(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
+    public ResponseEntity<DecoderMessageHandler> runtimeException(RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DecoderMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
     }
 }

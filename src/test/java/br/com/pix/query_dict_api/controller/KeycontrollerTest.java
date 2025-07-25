@@ -3,7 +3,7 @@ package br.com.pix.query_dict_api.controller;
 
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.domain.entries.Entry;
-import br.com.pix.query_dict_api.service.EntryService;
+import br.com.pix.query_dict_api.service.EntriesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,11 +19,11 @@ import static org.mockito.Mockito.when;
 class KeycontrollerTest {
 
     @Mock
-    private EntryService entryService;
+    private EntriesService entryService;
     @Mock
     private GetEntryResponse getEntryResponse;
     @InjectMocks
-    private KeyController keyController;
+    private EntriesController entriesController;
 
     @BeforeEach
     void setUp() {
@@ -32,18 +32,18 @@ class KeycontrollerTest {
 
     @Test
     void testGetEntryByKeySuccessful() {
-        GetEntryResponse expectedResponse = new GetEntryResponse();
+        GetEntryResponse response = new GetEntryResponse();
         String key = "27529429078";
-        expectedResponse.setEntry(Entry.builder().key(key).build());
-        when(entryService.getEntryByKey(key)).thenReturn(expectedResponse);
-        ResponseEntity<GetEntryResponse> responseEntity = keyController.getEntryByKey(key);
+        response.setEntry(Entry.builder().key(key).build());
+        when(entryService.getEntryByKey(key)).thenReturn(response);
+        ResponseEntity<GetEntryResponse> responseEntity = entriesController.getEntryByKey(key);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        assertEquals(expectedResponse, responseEntity.getBody());
+        assertEquals(response, responseEntity.getBody());
     }
 
     @Test
     void testGetEntryByKeyNotFound() {
-        ResponseEntity<GetEntryResponse> responseEntity = keyController.getEntryByKey("27529429022");
+        ResponseEntity<GetEntryResponse> responseEntity = entriesController.getEntryByKey("27529429022");
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
         assertNull(responseEntity.getBody());
     }
