@@ -3,7 +3,7 @@ package br.com.pix.query_dict_api.service;
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
 import br.com.pix.query_dict_api.domain.entries.*;
 import br.com.pix.query_dict_api.exception.EntriesNotFoundException;
-import br.com.pix.query_dict_api.repo.EntriesRepository;
+import br.com.pix.query_dict_api.infra.CacheManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -26,7 +26,7 @@ class EntriesServiceTest {
     private EntriesHelper entriesHelper;
 
     @Mock
-    private EntriesRepository entriesRepository;
+    private CacheManager repository;
 
     @InjectMocks
     private EntriesService entriesService;
@@ -64,7 +64,7 @@ class EntriesServiceTest {
                 .ownerStatistics(null)
                 .build();
         when(validationHelper.validationKeyType(newEntries.getEntry().getKey())).thenReturn(KeyType.CPF);
-        when(entriesRepository.findEntryByKey(newEntries.getEntry().getKey())).thenReturn(newEntries);
+        when(repository.findEntry(newEntries.getEntry().getKey())).thenReturn(newEntries);
         when(entriesHelper.mountGetEntryResponse(any())).thenReturn(new GetEntryResponse());
 
     }
@@ -81,7 +81,7 @@ class EntriesServiceTest {
     void testGetEntrytByKeyWithNonExistentKey() {
         String nonExistentKey = "99999999999";
         when(validationHelper.validationKeyType(nonExistentKey)).thenReturn(KeyType.CPF);
-        when(entriesRepository.findEntryByKey(nonExistentKey)).thenReturn(null);
+        when(repository.findEntry(nonExistentKey)).thenReturn(null);
         when(entriesHelper.mountGetEntryResponse(null)).thenThrow(new EntriesNotFoundException("Entries not found."));
     }
 }

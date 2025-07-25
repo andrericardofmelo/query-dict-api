@@ -2,7 +2,7 @@ package br.com.pix.query_dict_api.service;
 
 import br.com.pix.query_dict_api.domain.dto.AccountRequest;
 import br.com.pix.query_dict_api.domain.dto.GetEntryResponse;
-import br.com.pix.query_dict_api.repo.EntriesRepository;
+import br.com.pix.query_dict_api.infra.CacheManager;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,18 +14,18 @@ public class EntriesService {
     private final AccountHelper accountHelper;
     private final ValidationHelper validationHelper;
     private final EntriesHelper entriesHelper;
-    private final EntriesRepository entriesRepository;
+    private final CacheManager repository;
 
-    public EntriesService(AccountHelper accountHelper, ValidationHelper validationHelper, EntriesHelper entriesHelper, EntriesRepository entriesRepository) {
+    public EntriesService(AccountHelper accountHelper, ValidationHelper validationHelper, EntriesHelper entriesHelper, CacheManager cacheManager) {
         this.accountHelper = accountHelper;
         this.validationHelper = validationHelper;
         this.entriesHelper = entriesHelper;
-        this.entriesRepository = entriesRepository;
+        this.repository = cacheManager;
     }
 
     public GetEntryResponse getEntryByKey(String key) {
         validationHelper.validationKeyType(key);
-        return entriesHelper.mountGetEntryResponse(entriesRepository.findEntryByKey(key));
+        return entriesHelper.mountGetEntryResponse(repository.findEntry(key));
     }
 
     public List<GetEntryResponse> getEntriesByAccount(AccountRequest accountRequest) {

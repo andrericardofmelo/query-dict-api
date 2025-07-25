@@ -1,8 +1,9 @@
 package br.com.pix.query_dict_api.infra;
 
-import br.com.pix.query_dict_api.exception.EntriesNotFoundException;
 import br.com.pix.query_dict_api.exception.DecoderMessageHandler;
+import br.com.pix.query_dict_api.exception.EntriesNotFoundException;
 import br.com.pix.query_dict_api.exception.InvalidKeyTypeException;
+import br.com.pix.query_dict_api.exception.RepositoryExcection;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +20,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntriesNotFoundException.class)
     public ResponseEntity<DecoderMessageHandler> entriesNotFoundException(EntriesNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new DecoderMessageHandler(HttpStatus.NOT_FOUND, e.getMessage()));
+    }
+
+    @ExceptionHandler(RepositoryExcection.class)
+    public ResponseEntity<DecoderMessageHandler> repositoryException(RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DecoderMessageHandler(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()));
     }
 
     @ExceptionHandler(RuntimeException.class)

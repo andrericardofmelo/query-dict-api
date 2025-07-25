@@ -20,8 +20,6 @@ class KeycontrollerTest {
 
     @Mock
     private EntriesService entryService;
-    @Mock
-    private GetEntryResponse getEntryResponse;
     @InjectMocks
     private EntriesController entriesController;
 
