@@ -22,7 +22,7 @@ public class CacheManager {
                 .maximumSize(500)
                 .expireAfterWrite(5, TimeUnit.MINUTES)
                 .recordStats()
-                .build(new CacheLoader<String, Entries>() {
+                .build(new CacheLoader<>() {
                     @Override
                     public Entries load(String key) {
                         return entriesRepository.findEntryByKey(key);
